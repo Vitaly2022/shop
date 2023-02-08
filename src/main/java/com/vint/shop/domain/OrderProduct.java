@@ -3,7 +3,8 @@ package com.vint.shop.domain;
 import javax.persistence.*;
 
 @Entity
-public class Order_Product { //Getters and Setters + .........
+@Table (name="orderproduct")
+public class OrderProduct { //Getters and Setters + .........
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

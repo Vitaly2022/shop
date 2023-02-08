@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name = "users")
-public class Users {
+@Table (name = "\"user\"")
+public class User { //изменить название класса
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -27,9 +27,10 @@ public class Users {
     @Column(name = "mobile")
     private String mobile;
 
-    @Column(name = "role_id")
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
-    private List<Roles> role_id;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "role_id")
+    private Role role;
+
 
     @Column(name = "registered_at")
     private String registered_at;
@@ -42,22 +43,11 @@ public class Users {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
-        return id == users.id && Objects.equals(password_hash, users.password_hash) && Objects.equals(first_name, users.first_name) && Objects.equals(last_name, users.last_name) && Objects.equals(email, users.email) && Objects.equals(mobile, users.mobile) && Objects.equals(role_id, users.role_id) && Objects.equals(registered_at, users.registered_at);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, password_hash, first_name, last_name, email, mobile, role_id, registered_at);
-    }
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "id=" + id +
                 ", password_hash='" + password_hash + '\'' +
                 ", first_name='" + first_name + '\'' +
@@ -66,5 +56,18 @@ public class Users {
                 ", mobile='" + mobile + '\'' +
                 ", registered_at='" + registered_at + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId() == user.getId() && Objects.equals(password_hash, user.password_hash) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile) && Objects.equals(role, user.role) && Objects.equals(registered_at, user.registered_at);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), password_hash, first_name, last_name, email, mobile, role, registered_at);
     }
 }

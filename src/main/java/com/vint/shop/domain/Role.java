@@ -1,13 +1,14 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table (name = "manufacturer")
-public class Manufacturer {
-
+@Table (name="role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -16,9 +17,9 @@ public class Manufacturer {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "product_id")
-    private Product product;
+    @Column(name = "role_id")
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
+    private List<User> user_id;
 
     public int getId() {
         return id;
@@ -32,21 +33,19 @@ public class Manufacturer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Manufacturer that = (Manufacturer) o;
-        return getId() == that.getId() && Objects.equals(name, that.name) && Objects.equals(product, that.product);
+        Role role = (Role) o;
+        return getId() == role.getId() && Objects.equals(name, role.name) && Objects.equals(user_id, role.user_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), name, product);
+        return Objects.hash(getId(), name, user_id);
     }
 
     @Override
     public String toString() {
-        return "Manufacturer{" +
+        return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", product=" + product +
-                '}';
+                ", name='" + name + '\'' +           '}';
     }
 }

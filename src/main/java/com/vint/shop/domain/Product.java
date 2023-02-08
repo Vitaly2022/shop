@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table (name="product")
 public class Product {   // toString сделать
 
     @Id
@@ -16,7 +17,6 @@ public class Product {   // toString сделать
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
     private List<Supplier> supplier_id;
 
-
     @Column(name = "name")
     private String name;
 
@@ -26,7 +26,7 @@ public class Product {   // toString сделать
     @Column(name = "discription")
     private String discription;
 
-    @Column(name = "manufacturer_id") //connection
+    @Column(name = "manufacturer_id")
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
     private List <Manufacturer> manufacturer;
 
@@ -39,7 +39,7 @@ public class Product {   // toString сделать
     @Column (name ="rating")
     private int rating;
 
-    @Column (name ="users_vote")
-    private int users_vote;
+    @Column (name ="usersvote")
+    private int usersvote;
 
 }

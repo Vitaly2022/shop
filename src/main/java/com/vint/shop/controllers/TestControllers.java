@@ -1,6 +1,6 @@
 package com.vint.shop.controllers;
 
-import com.vint.shop.repository.UsersRepository;
+import com.vint.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TestControllers {
 
     @Autowired
-    UsersRepository usersRepository;
+    public UserRepository userRepository;
 
     @GetMapping("/admin")
     public String home() {
-        System.out.println(usersRepository.findUsersById(1));
+        System.out.println(userRepository.findUserById(1));
 
         return "admin";
     }
