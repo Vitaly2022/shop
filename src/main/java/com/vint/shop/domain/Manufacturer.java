@@ -16,9 +16,9 @@ public class Manufacturer {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "product_id")
-    private Product product;
+
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "manufacturer")
+    private List<Product> products;
 
     public int getId() {
         return id;
@@ -28,17 +28,25 @@ public class Manufacturer {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return getId() == that.getId() && Objects.equals(name, that.name) && Objects.equals(product, that.product);
+        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(products, that.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), name, product);
+        return Objects.hash(getId(), getName(), products);
     }
 
     @Override
@@ -46,7 +54,6 @@ public class Manufacturer {
         return "Manufacturer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", product=" + product +
                 '}';
     }
 }

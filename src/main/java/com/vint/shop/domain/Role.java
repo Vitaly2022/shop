@@ -17,9 +17,8 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "role_id")
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
-    private List<User> user_id;
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "role")
+    private List<User> users;
 
     public int getId() {
         return id;
@@ -29,23 +28,40 @@ public class Role {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return getId() == role.getId() && Objects.equals(name, role.name) && Objects.equals(user_id, role.user_id);
+        return getId() == role.getId() && Objects.equals(getName(), role.getName()) && Objects.equals(getUsers(), role.getUsers());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), name, user_id);
+        return Objects.hash(getId(), getName(), getUsers());
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +           '}';
+                ", name='" + name + '\'' +
+                '}';
     }
 }

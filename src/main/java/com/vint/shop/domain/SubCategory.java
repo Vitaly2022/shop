@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table (name="subcategory")
 public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,9 +15,12 @@ public class SubCategory {
     @Column (name = "name")
     private String name;
 
-    @Column(name = "category_id")
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "id")
-    private List<Category> category_id;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "category_id")
+    private Category category;
+
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "subcategory")
+    private List<Product> products;
 
     public int getId() {
         return id;
@@ -34,12 +38,20 @@ public class SubCategory {
         this.name = name;
     }
 
-    public List<Category> getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(List<Category> category_id) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -47,12 +59,12 @@ public class SubCategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubCategory that = (SubCategory) o;
-        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(getCategory_id(), that.getCategory_id());
+        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(getCategory(), that.getCategory()) && Objects.equals(getProducts(), that.getProducts());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCategory_id());
+        return Objects.hash(getId(), getName(), getCategory(), getProducts());
     }
 
     @Override
@@ -60,6 +72,7 @@ public class SubCategory {
         return "SubCategory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", category=" + category +
                 '}';
     }
 }

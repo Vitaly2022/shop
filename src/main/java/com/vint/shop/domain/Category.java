@@ -1,6 +1,7 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,9 +16,8 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "subcategory_id")
-    private SubCategory subCategory;
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "category")
+    private List<SubCategory> subcategory;
 
     public int getId() {
         return id;
@@ -35,12 +35,12 @@ public class Category {
         this.name = name;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
+    public List<SubCategory> getSubcategory() {
+        return subcategory;
     }
 
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
+    public void setSubcategory(List<SubCategory> subcategory) {
+        this.subcategory = subcategory;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return getId() == category.getId() && Objects.equals(getName(), category.getName()) && Objects.equals(getSubCategory(), category.getSubCategory());
+        return getId() == category.getId() && Objects.equals(getName(), category.getName()) && Objects.equals(getSubcategory(), category.getSubcategory());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getSubCategory());
+        return Objects.hash(getId(), getName(), getSubcategory());
     }
 
     @Override
@@ -61,7 +61,6 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", subCategory=" + subCategory +
                 '}';
     }
 }
