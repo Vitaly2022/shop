@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name = "manufacturer")
+@Table(name = "manufacturer")
 public class Manufacturer {
 
     @Id
@@ -16,8 +16,7 @@ public class Manufacturer {
     @Column(name = "name")
     private String name;
 
-
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "manufacturer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manufacturer")
     private List<Product> products;
 
     public int getId() {
@@ -36,17 +35,25 @@ public class Manufacturer {
         this.name = name;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manufacturer that = (Manufacturer) o;
-        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(products, that.products);
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(products, that.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), products);
+        return Objects.hash(id, name, products);
     }
 
     @Override

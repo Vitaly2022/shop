@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table (name="orderproduct")
-public class OrderProduct {
+@Table(name = "orderproductmap")
+public class OrderProductMap {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "order_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @Column(name = "quantity")
@@ -70,18 +70,18 @@ public class OrderProduct {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderProduct that = (OrderProduct) o;
-        return getId() == that.getId() && getQuantity() == that.getQuantity() && Float.compare(that.getPrice(), getPrice()) == 0 && Objects.equals(getProduct(), that.getProduct()) && Objects.equals(getOrder(), that.getOrder());
+        OrderProductMap that = (OrderProductMap) o;
+        return id == that.id && quantity == that.quantity && Float.compare(that.price, price) == 0 && Objects.equals(product, that.product) && Objects.equals(order, that.order);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProduct(), getOrder(), getQuantity(), getPrice());
+        return Objects.hash(id, product, order, quantity, price);
     }
 
     @Override
     public String toString() {
-        return "OrderProduct{" +
+        return "OrderProductMap{" +
                 "id=" + id +
                 ", product=" + product +
                 ", order=" + order +

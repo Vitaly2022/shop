@@ -1,11 +1,13 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
-@Table (name = "order")
+@Table(name = "order")
 public class Order {
 
     @Id
@@ -13,12 +15,12 @@ public class Order {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "order")
-    private List<Order> order;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<OrderProductMap> orderproductmaps;
 
     @Column(name = "status")
     private String status;
@@ -27,7 +29,7 @@ public class Order {
     private float grand_total;
 
     @Column(name = "date_order")
-    private String date_order;
+    private LocalDate date_order;
 
     @Column(name = "description")
     private String description;
@@ -48,12 +50,12 @@ public class Order {
         this.user = user;
     }
 
-    public List<Order> getOrder() {
-        return order;
+    public List<OrderProductMap> getOrderproductmaps() {
+        return orderproductmaps;
     }
 
-    public void setOrder(List<Order> order) {
-        this.order = order;
+    public void setOrderproductmaps(List<OrderProductMap> orderproductmaps) {
+        this.orderproductmaps = orderproductmaps;
     }
 
     public String getStatus() {
@@ -72,11 +74,11 @@ public class Order {
         this.grand_total = grand_total;
     }
 
-    public String getDate_order() {
+    public LocalDate getDate_order() {
         return date_order;
     }
 
-    public void setDate_order(String date_order) {
+    public void setDate_order(LocalDate date_order) {
         this.date_order = date_order;
     }
 
@@ -92,13 +94,13 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order1 = (Order) o;
-        return getId() == order1.getId() && Float.compare(order1.getGrand_total(), getGrand_total()) == 0 && Objects.equals(getUser(), order1.getUser()) && Objects.equals(getOrder(), order1.getOrder()) && Objects.equals(getStatus(), order1.getStatus()) && Objects.equals(getDate_order(), order1.getDate_order()) && Objects.equals(getDescription(), order1.getDescription());
+        Order order = (Order) o;
+        return id == order.id && Float.compare(order.grand_total, grand_total) == 0 && Objects.equals(user, order.user) && Objects.equals(orderproductmaps, order.orderproductmaps) && Objects.equals(status, order.status) && Objects.equals(date_order, order.date_order) && Objects.equals(description, order.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUser(), getOrder(), getStatus(), getGrand_total(), getDate_order(), getDescription());
+        return Objects.hash(id, user, orderproductmaps, status, grand_total, date_order, description);
     }
 
     @Override
@@ -108,7 +110,7 @@ public class Order {
                 ", user=" + user +
                 ", status='" + status + '\'' +
                 ", grand_total=" + grand_total +
-                ", date_order='" + date_order + '\'' +
+                ", date_order=" + date_order +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Supplier { // toString
+@Table (name="supplier")
+public class Supplier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,12 +60,12 @@ public class Supplier { // toString
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Supplier supplier = (Supplier) o;
-        return getId() == supplier.getId() && Objects.equals(getName(), supplier.getName()) && Objects.equals(getEmail(), supplier.getEmail()) && Objects.equals(getProducts(), supplier.getProducts());
+        return id == supplier.id && Objects.equals(name, supplier.name) && Objects.equals(email, supplier.email) && Objects.equals(products, supplier.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getProducts());
+        return Objects.hash(id, name, email, products);
     }
 
     @Override

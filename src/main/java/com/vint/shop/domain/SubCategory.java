@@ -1,26 +1,22 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name="subcategory")
+@Table(name = "subcategory")
 public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "id")
+    @Column(name = "id")
     private int id;
 
-    @Column (name = "name")
+    @Column(name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private Category category;
-
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "subcategory")
-    private List<Product> products;
 
     public int getId() {
         return id;
@@ -46,25 +42,17 @@ public class SubCategory {
         this.category = category;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubCategory that = (SubCategory) o;
-        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(getCategory(), that.getCategory()) && Objects.equals(getProducts(), that.getProducts());
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCategory(), getProducts());
+        return Objects.hash(id, name, category);
     }
 
     @Override

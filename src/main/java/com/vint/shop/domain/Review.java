@@ -1,10 +1,11 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table (name = "review")
+@Table(name = "review")
 public class Review {
 
     @Id
@@ -12,22 +13,22 @@ public class Review {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "product_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="content")
+    @Column(name = "content")
     private String content;
 
-    @Column(name="created_at")
-    private String created_at;
+    @Column(name = "created_at")
+    private LocalDate created_at;
 
     public int getId() {
         return id;
@@ -69,11 +70,11 @@ public class Review {
         this.content = content;
     }
 
-    public String getCreated_at() {
+    public LocalDate getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(LocalDate created_at) {
         this.created_at = created_at;
     }
 
@@ -82,12 +83,12 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return getId() == review.getId() && Objects.equals(getUser(), review.getUser()) && Objects.equals(getProduct(), review.getProduct()) && Objects.equals(getTitle(), review.getTitle()) && Objects.equals(getContent(), review.getContent()) && Objects.equals(getCreated_at(), review.getCreated_at());
+        return id == review.id && Objects.equals(user, review.user) && Objects.equals(product, review.product) && Objects.equals(title, review.title) && Objects.equals(content, review.content) && Objects.equals(created_at, review.created_at);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUser(), getProduct(), getTitle(), getContent(), getCreated_at());
+        return Objects.hash(id, user, product, title, content, created_at);
     }
 
     @Override
@@ -98,7 +99,7 @@ public class Review {
                 ", product=" + product +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", created_at='" + created_at + '\'' +
+                ", created_at=" + created_at +
                 '}';
     }
 }

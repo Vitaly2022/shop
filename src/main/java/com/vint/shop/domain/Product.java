@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name="product")
+@Table(name = "product")
 public class Product {   // toString сделать
 
     @Id
@@ -13,40 +13,37 @@ public class Product {   // toString сделать
     @Column(name = "id")
     private int id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "supplier_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "subcategory_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subcategory_id")
     private SubCategory subcategory;
 
     @Column(name = "discription")
     private String discription;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "manufacturer_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
     @Column(name = "price")
     private float price;
 
-    @Column (name ="quantity")
+    @Column(name = "quantity")
     private int quantity;
 
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "product")
-    private List<OrderProduct> orderProducts;
-
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<Review> reviews;
 
-    @Column (name ="rating")
+    @Column(name = "rating")
     private int rating;
 
-    @Column (name ="usersvote")
+    @Column(name = "usersvote")
     private int usersvote;
 
     public int getId() {
@@ -113,14 +110,6 @@ public class Product {   // toString сделать
         this.quantity = quantity;
     }
 
-    public List<OrderProduct> getOrderProducts() {
-        return orderProducts;
-    }
-
-    public void setOrderProducts(List<OrderProduct> orderProducts) {
-        this.orderProducts = orderProducts;
-    }
-
     public List<Review> getReviews() {
         return reviews;
     }
@@ -150,12 +139,12 @@ public class Product {   // toString сделать
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return getId() == product.getId() && Float.compare(product.getPrice(), getPrice()) == 0 && getQuantity() == product.getQuantity() && getRating() == product.getRating() && getUsersvote() == product.getUsersvote() && Objects.equals(getSupplier(), product.getSupplier()) && Objects.equals(getName(), product.getName()) && Objects.equals(getSubcategory(), product.getSubcategory()) && Objects.equals(getDiscription(), product.getDiscription()) && Objects.equals(getManufacturer(), product.getManufacturer()) && Objects.equals(getOrderProducts(), product.getOrderProducts()) && Objects.equals(getReviews(), product.getReviews());
+        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(subcategory, product.subcategory) && Objects.equals(discription, product.discription) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSupplier(), getName(), getSubcategory(), getDiscription(), getManufacturer(), getPrice(), getQuantity(), getOrderProducts(), getReviews(), getRating(), getUsersvote());
+        return Objects.hash(id, supplier, name, subcategory, discription, manufacturer, price, quantity, reviews, rating, usersvote);
     }
 
     @Override

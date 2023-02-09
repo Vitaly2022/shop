@@ -1,11 +1,11 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table (name = "\"user\"")
+@Table(name = "\"user\"")
 public class User { //изменить название класса
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,18 +26,12 @@ public class User { //изменить название класса
     @Column(name = "mobile")
     private String mobile;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "role_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @Column(name = "registered_at")
-    private String registered_at;
-
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Order> orders;
-
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "product")
-    private List<Review> reviews;
+    private LocalDate registered_at;
 
     public int getId() {
         return id;
@@ -95,28 +89,12 @@ public class User { //изменить название класса
         this.role = role;
     }
 
-    public String getRegistered_at() {
+    public LocalDate getRegistered_at() {
         return registered_at;
     }
 
-    public void setRegistered_at(String registered_at) {
+    public void setRegistered_at(LocalDate registered_at) {
         this.registered_at = registered_at;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
     }
 
     @Override
@@ -124,12 +102,12 @@ public class User { //изменить название класса
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return getId() == user.getId() && Objects.equals(getPassword_hash(), user.getPassword_hash()) && Objects.equals(getFirst_name(), user.getFirst_name()) && Objects.equals(getLast_name(), user.getLast_name()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getMobile(), user.getMobile()) && Objects.equals(getRole(), user.getRole()) && Objects.equals(getRegistered_at(), user.getRegistered_at()) && Objects.equals(getOrders(), user.getOrders()) && Objects.equals(getReviews(), user.getReviews());
+        return id == user.id && Objects.equals(password_hash, user.password_hash) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile) && Objects.equals(role, user.role) && Objects.equals(registered_at, user.registered_at);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPassword_hash(), getFirst_name(), getLast_name(), getEmail(), getMobile(), getRole(), getRegistered_at(), getOrders(), getReviews());
+        return Objects.hash(id, password_hash, first_name, last_name, email, mobile, role, registered_at);
     }
 
     @Override
@@ -142,7 +120,7 @@ public class User { //изменить название класса
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", role=" + role +
-                ", registered_at='" + registered_at + '\'' +
+                ", registered_at=" + registered_at +
                 '}';
     }
 }
