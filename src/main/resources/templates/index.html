@@ -1,0 +1,30 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<head>
+    <title>Главная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">-->
+</head>
+<body>
+<div>
+
+    <sec:authorize access="!isAuthenticated()">
+        <h4><a href="/login">Enter</a></h4>
+        <h4><a href="/registration">Registration</a></h4>
+    </sec:authorize>
+
+<!--    <sec:authorize access="isAuthenticated()">-->
+<!--        <h4><a href="/logout">Logout</a></h4>-->
+<!--    </sec:authorize>-->
+
+    <div>
+        <form action="/logout" method="post">
+           <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+
+    <h4><a href="/news">News (only USER)</a></h4>
+    <h4><a href="/admin">Product (only ADMIN)</a></h4>
+</div>
+</body>
+</html>
