@@ -40,10 +40,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
+        User user = userRepository.findByLogin(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Login not found");
         }
 
         return user;
@@ -62,7 +62,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public boolean saveUser(User user) {
-        User userFromDB = userRepository.findUserByUsername(user.getUsername());
+        User userFromDB = userRepository.findByLogin(user.getLogin());
 
         if (userFromDB != null) {
             return false;

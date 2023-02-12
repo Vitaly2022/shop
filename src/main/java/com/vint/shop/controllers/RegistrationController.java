@@ -14,9 +14,13 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceimpl;
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
     @GetMapping("/registration")
     public String registration(Model model) {
