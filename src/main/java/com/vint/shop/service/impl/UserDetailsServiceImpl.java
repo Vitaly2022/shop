@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     protected RoleRepository roleRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    protected PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -57,7 +57,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return false;
     }
 
-    public List<User> allUsers() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 

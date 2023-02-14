@@ -14,25 +14,37 @@ public class AdminController {
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
-    @GetMapping("/admin")
+    @GetMapping ("/admin")
+    public String adminhome () {
+
+        return "admin";
+    }
+
+    @GetMapping("/admin/editusers")
     public String userList(Model model) {
-        model.addAttribute("allUsers", userDetailsServiceImpl.allUsers());
-        return "admin";
+        model.addAttribute("allUsers", userDetailsServiceImpl.findAll());
+        model.addAttribute("roleUsers", userDetailsServiceImpl.findAll());
+
+        return "editusers";
     }
 
-    @PostMapping("/admin")
-    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-                              @RequestParam(required = true, defaultValue = "" ) String action,
-                              Model model) {
-        if (action.equals("delete")){
-            userDetailsServiceImpl.deleteUser(userId);
-        }
-        return "redirect:/admin";
+    @GetMapping("/admin/user/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userDetailsServiceImpl.deleteUser(id);
+        return "redirect:/admin/editusers";
     }
 
-    @GetMapping("/admin/gt/{userId}")
-    public String  gtUser(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute("allUsers", userDetailsServiceImpl.usergtList(userId));
-        return "admin";
-    }
+//    @PostMapping("/admin/editusers")
+//    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
+//                              @RequestParam(required = true, defaultValue = "" ) String actionn,
+//                              Model model) {
+//        if (actionn.equals("delete")){
+//            userDetailsServiceImpl.deleteUser(userId);
+//        }
+//        return "editusers";
+//        }
+
+
+
+
 }

@@ -30,7 +30,8 @@
                 <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
                 <br><br>
 
-                <label for="username">Введите ФИО: </label>
+<!--                <label for="username">Введите ФИО: </label>-->
+                <label for="username">#{user.username}</label>
                 <input type="text"  th:field="*{username}" name="username" id="username">
                 <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                 <br><br>

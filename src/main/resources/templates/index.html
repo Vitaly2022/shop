@@ -2,18 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 <head>
     <title>Главная</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+    <meta charset="ISO-8859-1" />
+    <title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="internationalization.js"></script>
 
 </head>
 <body>
-<div>
-    <div>
-        <form action="/logout" method="post">
-           <input type="submit" value="Sign Out"/>
+<h1 th:text="#{greeting}"></h1>
+
+<br /><br />
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="ru" th:text="#{lang.ru}"></option>
+</select>
+
+    <h4><a href="/registration">Registration</a></h4>
+    <div sec:authorize="!isAuthenticated()">
+    <h4><a href="/login">Login</a></h4>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <form  th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти">
         </form>
     </div>
-    <h4><a href="/news">News (only USER)</a></h4>
-    <h4><a href="/admin">Product (only ADMIN)</a></h4>
-</div>
+
+    <h4><a href="/news">USER BASKET</a></h4>
+    <h4><a href="/admin">ENTER FOR ADMIN</a></h4>
+
+
 </body>
 </html>
