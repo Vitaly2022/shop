@@ -1,39 +1,21 @@
-
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-<head>
-    <title>Главная</title>
+<!--lang="en"-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--<head>-->
+<!--    <title>Home</title>-->
 <!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
-    <meta charset="ISO-8859-1" />
-    <title>Home</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="internationalization.js"></script>
+<!--    <title>Home</title>-->
 
+<!--</head>-->
+
+<head th:replace="fragments/header :: header-css">
 </head>
+
 <body>
-<h1 th:text="#{greeting}"></h1>
 
-<br /><br />
-<span th:text="#{lang.change}"></span>:
-<select id="locales">
-    <option value=""></option>
-    <option value="en" th:text="#{lang.eng}"></option>
-    <option value="ru" th:text="#{lang.ru}"></option>
-</select>
+<div th:replace="fragments/header :: header"></div>
 
-    <h4><a href="/registration">Registration</a></h4>
-    <div sec:authorize="!isAuthenticated()">
-    <h4><a href="/login">Login</a></h4>
-    </div>
 
-    <div sec:authorize="isAuthenticated()">
-        <form  th:action="@{/logout}" method="post">
-            <input type="submit" value="Выйти">
-        </form>
-    </div>
-
-    <h4><a href="/news">USER BASKET</a></h4>
-    <h4><a href="/admin">ENTER FOR ADMIN</a></h4>
-
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

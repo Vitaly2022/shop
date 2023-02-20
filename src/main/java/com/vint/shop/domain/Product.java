@@ -6,28 +6,28 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "product")
-public class Product {   // toString сделать
+public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subcategory_id")
-    private SubCategory subcategory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(name = "discription")
     private String discription;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
@@ -37,7 +37,7 @@ public class Product {   // toString сделать
     @Column(name = "quantity")
     private int quantity;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private List<Review> reviews;
 
     @Column(name = "rating")
@@ -46,11 +46,11 @@ public class Product {   // toString сделать
     @Column(name = "usersvote")
     private int usersvote;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -70,12 +70,12 @@ public class Product {   // toString сделать
         this.name = name;
     }
 
-    public SubCategory getSubcategory() {
-        return subcategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setSubcategory(SubCategory subcategory) {
-        this.subcategory = subcategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getDiscription() {
@@ -139,12 +139,12 @@ public class Product {   // toString сделать
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(subcategory, product.subcategory) && Objects.equals(discription, product.discription) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
+        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(discription, product.discription) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, supplier, name, subcategory, discription, manufacturer, price, quantity, reviews, rating, usersvote);
+        return Objects.hash(id, supplier, name, category, discription, manufacturer, price, quantity, reviews, rating, usersvote);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class Product {   // toString сделать
                 "id=" + id +
                 ", supplier=" + supplier +
                 ", name='" + name + '\'' +
-                ", subcategory=" + subcategory +
+                ", category=" + category +
                 ", discription='" + discription + '\'' +
                 ", manufacturer=" + manufacturer +
                 ", price=" + price +

@@ -8,15 +8,15 @@ import java.util.Objects;
 public class OrderProductMap {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -26,7 +26,7 @@ public class OrderProductMap {
     @Column(name = "price")
     private float price;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

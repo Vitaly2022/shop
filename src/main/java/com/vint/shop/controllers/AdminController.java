@@ -1,48 +1,55 @@
 package com.vint.shop.controllers;
 
+import com.vint.shop.domain.User;
+import com.vint.shop.repository.UserRepository;
 import com.vint.shop.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Controller
+@RequestMapping ("/admin")
 public class AdminController {
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
+    @Autowired
+    private UserRepository userRepository;
 
-    @GetMapping ("/admin")
-    public String adminhome () {
+    @GetMapping
+    public String adminhome() {
 
-        return "admin";
+        return "admin/admin";
     }
 
-    @GetMapping("/admin/editusers")
+    @GetMapping("/editusers")
     public String userList(Model model) {
         model.addAttribute("allUsers", userDetailsServiceImpl.findAll());
         model.addAttribute("roleUsers", userDetailsServiceImpl.findAll());
 
-        return "editusers";
+        return "admin/editusers";
     }
 
-    @GetMapping("/admin/user/delete/{id}")
+    @GetMapping("/editusers/{id}")
+    public String userid(@PathVariable("id") Long id, Model model) {
+        User usercard = userRepository.findById(id).get();
+        model.addAttribute("usercard", usercard);
+    //    System.out.println(userRepository.findById(id));
+        return "admin/usercard";
+    }
+
+    @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userDetailsServiceImpl.deleteUser(id);
         return "redirect:/admin/editusers";
     }
 
-//    @PostMapping("/admin/editusers")
-//    public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-//                              @RequestParam(required = true, defaultValue = "" ) String actionn,
-//                              Model model) {
-//        if (actionn.equals("delete")){
-//            userDetailsServiceImpl.deleteUser(userId);
-//        }
-//        return "editusers";
-//        }
+
+
 
 
 

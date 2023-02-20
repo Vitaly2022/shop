@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+
+    <style type="text/css">
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px solid black; /* Параметры рамки */
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr bgcolor="#87CEEB">
+        <td>ID</td>
+        <td>Login</td>
+        <td>UserName</td>
+        <td>Roles</td>
+        <td>E-mail</td>
+        <td>Mobile</td>
+        <td>Registration at</td>
+    </tr>
+    <tr>
+        <td th:text="${usercard.id}" </td>
+        <td th:text="${usercard.login}" </td>
+        <td th:text="${usercard.username}" </td>
+        <td th:text="${usercard.getRoles()}" </td>
+        <td th:text="${usercard.email}" </td>
+        <td th:text="${usercard.mobile}" </td>
+        <td th:text="${usercard.registered_at}" </td>
+    </tr>
+</table>
+<br>
+
+<form action="/admin/editusers">
+    <button type="submit"> Назад </button>
+</form>
+<br>
+<form action="/">
+    <button type="submit">Главная</button>
+</form>
+
+</body>
+</html>

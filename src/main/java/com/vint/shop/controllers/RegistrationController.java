@@ -40,7 +40,7 @@ public class RegistrationController {
             return "registration";
         }
         if (!userDetailsServiceimpl.saveUser(userForm)){
-            model.addAttribute("usernameError", "This name is taken");
+            model.addAttribute("usernameError", "This login is taken");
             return "registration";
         }
 

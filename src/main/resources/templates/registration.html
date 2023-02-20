@@ -31,7 +31,7 @@
                 <br><br>
 
 <!--                <label for="username">Введите ФИО: </label>-->
-                <label for="username">#{user.username}</label>
+                <label for="username">Введите полное имя</label>
                 <input type="text"  th:field="*{username}" name="username" id="username">
                 <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                 <br><br>
@@ -55,11 +55,6 @@
                 <input type="text"  th:field="*{mobile}" name="mobile" id="mobile">
                 <div style="color: red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
                 <br><br>
-
-<!--                <label for="registered_at">Введите дату регистрации: </label>-->
-<!--                <input type="date"  th:field="*{registered_at}" name="registered_at" id="registered_at">-->
-<!--                <div style="color: red" th:if="${#fields.hasErrors('registered_at')}" th:errors="*{registered_at}"></div>-->
-<!--                <br><br>-->
 
                 <input type="submit" value="Зарегистрироваться">
             </form>

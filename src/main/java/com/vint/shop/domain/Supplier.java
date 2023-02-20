@@ -1,17 +1,16 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table (name="supplier")
+@Table(name = "supplier")
 public class Supplier {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -20,14 +19,11 @@ public class Supplier {
     @Column(name = "email")
     private String email;
 
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "supplier")
-    private List<Product> products;
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -47,25 +43,17 @@ public class Supplier {
         this.email = email;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Supplier supplier = (Supplier) o;
-        return id == supplier.id && Objects.equals(name, supplier.name) && Objects.equals(email, supplier.email) && Objects.equals(products, supplier.products);
+        return id == supplier.id && Objects.equals(name, supplier.name) && Objects.equals(email, supplier.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, products);
+        return Objects.hash(id, name, email);
     }
 
     @Override

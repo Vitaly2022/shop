@@ -1,27 +1,46 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Spring Security Example </title>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header-css">
 </head>
+
 <body>
-<div th:if="${param.error}">
-Invalid password
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-
-    <div><label> Username : <input type="text" name="login" placeholder="Login" autofocus="true"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<br>
-<form action="/">
-    <button type="submit">Home</button>
-</form>
-
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form autocomplete="off" th:action="@{/login}" class="form-signin" method="POST">
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info" th:text="#{login.alert.logged_out}"></div>
+                    </div>
+                    <fieldset>
+                        <h1 th:text="#{login.sign_in}"></h1>
+                        <label th:text="#{user.username}"></label>
+                        <div class="form-group">
+                            <input type="text" name="login" class="form-control input-lg" placeholder="" required="true" autofocus="true"/>
+                        </div>
+                        <label th:text="#{user.password}"></label>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control input-lg" placeholder="" required="true" />
+                        </div>
+                        <div th:if="${param.error}">
+                            Invalid password
+                        </div>
+                        <span th:text="#{login.no_account}"></span>
+                        <span>
+                            <a th:href="@{/registration}" th:text="#{register.button}"></a>
+                        </span>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <input type="submit" name="login-sumbit" id="login-sumbit" class="btn btn-lg btn-primary btn-block" th:value="#{user.log_in}" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
+
 </html>

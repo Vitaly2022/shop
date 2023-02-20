@@ -7,19 +7,17 @@ import com.vint.shop.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 
 @Service
@@ -63,19 +61,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByLogin(user.getLogin());
-
         if (userFromDB != null) {
             return false;
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setRegistered_at(LocalDate.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
 
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
 }
