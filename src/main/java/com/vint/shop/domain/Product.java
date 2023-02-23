@@ -24,8 +24,11 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "discription")
-    private String discription;
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "image")
+    private String imageUrl;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
@@ -78,12 +81,20 @@ public class Product {
         this.category = category;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Manufacturer getManufacturer() {
@@ -139,12 +150,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(discription, product.discription) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
+        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, supplier, name, category, discription, manufacturer, price, quantity, reviews, rating, usersvote);
+        return Objects.hash(id, supplier, name, category, description, imageUrl, manufacturer, price, quantity, reviews, rating, usersvote);
     }
 
     @Override
@@ -154,7 +165,8 @@ public class Product {
                 ", supplier=" + supplier +
                 ", name='" + name + '\'' +
                 ", category=" + category +
-                ", discription='" + discription + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + imageUrl + '\'' +
                 ", manufacturer=" + manufacturer +
                 ", price=" + price +
                 ", quantity=" + quantity +

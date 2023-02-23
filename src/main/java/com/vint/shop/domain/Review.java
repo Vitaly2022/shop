@@ -14,7 +14,7 @@ public class Review {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "users_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
