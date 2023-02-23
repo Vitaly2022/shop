@@ -3,7 +3,8 @@ html {
 }
 
 body {
-    background: rgb(209, 209, 216);
+    /*background: rgb(209, 209, 216);*/
+    /*background: rgb(209, 209, 216);*/
     position: relative;
     margin: 0;
     padding-bottom: 6rem;
@@ -41,6 +42,11 @@ footer {
 nav {
     height: 60px;
 }
+
+/*.nav-link{*/
+/*    color: dodgerblue  !important;*/
+/*}*/
+
 
 .navbar-brand {
     font-size: 30px;
