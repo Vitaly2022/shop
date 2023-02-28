@@ -49,7 +49,7 @@ public class ProductController {
 
     @PostMapping("/new")
     public String createNewProduct(@ModelAttribute("newProductForm") Product newProductForm, Model model) {
-
+        System.out.println("New product=" + newProductForm);
         if (!productServiceImpl.saveProduct(newProductForm)) {
             model.addAttribute("productNameError", "This name is taken");
             return "admin/product/newproduct";

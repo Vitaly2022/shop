@@ -1,10 +1,7 @@
 package com.vint.shop.controllers;
 
-import com.vint.shop.domain.Category;
 import com.vint.shop.domain.Supplier;
-import com.vint.shop.repository.CategoryRepository;
 import com.vint.shop.repository.SupplierRepository;
-import com.vint.shop.service.impl.CategoryServiceImpl;
 import com.vint.shop.service.impl.SupplierServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,21 +21,23 @@ public class SupplierController {
     protected SupplierRepository supplierRepository;
 
     @GetMapping
-    public String viewSupplier (Model model) {
+    public String viewSupplier(Model model) {
         model.addAttribute("allSupplier", supplierServiceImpl.findAll());
         model.addAttribute("newSupplierForm", new Supplier());
         return "admin/supplier/supplier";
     }
+
     @PostMapping
     public String newSupplier(@ModelAttribute("newSupplierForm") Supplier newSupplierForm, Model model) {
 
-        if (!supplierServiceImpl.saveSupplier(newSupplierForm)){
+        if (!supplierServiceImpl.saveSupplier(newSupplierForm)) {
             model.addAttribute("newSupplierForm", "This supplier is taken");
             return "admin/supplier";
         }
         return "redirect:/admin/supplier";
 
     }
+
     @GetMapping("/delete/{id}")
     public String deleteSupplier(@PathVariable("id") long id) {
         supplierServiceImpl.deleteSupplier(id);
@@ -47,7 +46,7 @@ public class SupplierController {
 
     @GetMapping("/edit/{id}")
     public String editSupplier(@PathVariable("id") long id, Model model) {
-        if(!supplierRepository.existsById(id)) {
+        if (!supplierRepository.existsById(id)) {
             return "redirect:admin/supplier";
         }
         Supplier supplier = supplierRepository.findById(id).get();

@@ -1,6 +1,7 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -20,17 +21,20 @@ public class OrderProductMap {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @Column(name = "orderid")
+    private Long orderid;
+
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
     @Column(name = "price")
-    private float price;
+    private BigDecimal price;
 
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,19 +54,27 @@ public class OrderProductMap {
         this.order = order;
     }
 
-    public int getQuantity() {
+    public Long getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Long orderid) {
+        this.orderid = orderid;
+    }
+
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -71,12 +83,12 @@ public class OrderProductMap {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderProductMap that = (OrderProductMap) o;
-        return id == that.id && quantity == that.quantity && Float.compare(that.price, price) == 0 && Objects.equals(product, that.product) && Objects.equals(order, that.order);
+        return id == that.id && Objects.equals(product, that.product) && Objects.equals(order, that.order) && Objects.equals(orderid, that.orderid) && Objects.equals(quantity, that.quantity) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, order, quantity, price);
+        return Objects.hash(id, product, order, orderid, quantity, price);
     }
 
     @Override
@@ -85,6 +97,7 @@ public class OrderProductMap {
                 "id=" + id +
                 ", product=" + product +
                 ", order=" + order +
+                ", orderid=" + orderid +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 '}';

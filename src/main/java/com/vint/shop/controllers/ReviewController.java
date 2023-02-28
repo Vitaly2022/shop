@@ -1,10 +1,7 @@
 package com.vint.shop.controllers;
 
-import com.vint.shop.domain.Category;
 import com.vint.shop.domain.Review;
-import com.vint.shop.repository.CategoryRepository;
 import com.vint.shop.repository.ReviewRepository;
-import com.vint.shop.service.impl.CategoryServiceImpl;
 import com.vint.shop.service.impl.ReviewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,21 +21,22 @@ public class ReviewController {
     protected ReviewRepository reviewRepository;
 
     @GetMapping
-    public String viewCategory (Model model) {
+    public String viewCategory(Model model) {
         model.addAttribute("allReview", reviewServiceImpl.findAll());
         model.addAttribute("newReviewForm", new Review());
         return "admin/review/review";
     }
+
     @PostMapping
     public String newCategory(@ModelAttribute("newReviewForm") Review newReviewForm, Model model) {
-
-        if (!reviewServiceImpl.saveReview(newReviewForm)){
+        if (!reviewServiceImpl.saveReview(newReviewForm)) {
             model.addAttribute("reviewnameError", "This title review is taken");
             return "admin/review";
         }
         return "redirect:/admin/review";
 
     }
+
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") long id) {
         reviewServiceImpl.deleteReview(id);
@@ -47,7 +45,7 @@ public class ReviewController {
 
     @GetMapping("/edit/{id}")
     public String editCategory(@PathVariable("id") long id, Model model) {
-        if(!reviewRepository.existsById(id)) {
+        if (!reviewRepository.existsById(id)) {
             return "redirect:admin/review";
         }
         Review review = reviewRepository.findById(id).get();
@@ -65,7 +63,6 @@ public class ReviewController {
         reviewRepository.save(review);
         return "redirect:/admin/review";
     }
-
 
 
 }

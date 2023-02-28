@@ -1,6 +1,5 @@
 package com.vint.shop.controllers;
 
-import com.vint.shop.domain.Category;
 import com.vint.shop.domain.Manufacturer;
 import com.vint.shop.repository.ManufacturerRepository;
 import com.vint.shop.service.impl.ManufacturerServiceImpl;
@@ -23,21 +22,22 @@ public class ManufacturerController {
     protected ManufacturerRepository manufacturerRepository;
 
     @GetMapping
-    public String viewCategory (Model model) {
+    public String viewCategory(Model model) {
         model.addAttribute("allmanufacturers", manufacturerServiceImpl.findAll());
         model.addAttribute("newManufacturerForm", new Manufacturer());
         return "admin/manufacturer/manufacturer";
     }
+
     @PostMapping
     public String newCategory(@ModelAttribute("newManufacturerForm") Manufacturer newManufacturerForm, Model model) {
 
-        if (!manufacturerServiceImpl.saveManufacturer(newManufacturerForm)){
+        if (!manufacturerServiceImpl.saveManufacturer(newManufacturerForm)) {
             model.addAttribute("manufacturernameError", "This name is taken");
             return "admin/manufacturer";
         }
         return "redirect:/admin/manufacturer";
-
     }
+
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") long id) {
         manufacturerServiceImpl.deleteManufacturer(id);
@@ -46,7 +46,7 @@ public class ManufacturerController {
 
     @GetMapping("/edit/{id}")
     public String editCategory(@PathVariable("id") long id, Model model) {
-        if(!manufacturerRepository.existsById(id)) {
+        if (!manufacturerRepository.existsById(id)) {
             return "redirect:admin/manufacturer";
         }
         Manufacturer manufacturer = manufacturerRepository.findById(id).get();
@@ -64,8 +64,5 @@ public class ManufacturerController {
         manufacturerRepository.save(manufacturer);
         return "redirect:/admin/manufacturer";
     }
-
-
-
 
 }

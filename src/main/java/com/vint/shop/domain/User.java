@@ -30,7 +30,7 @@ public class User implements UserDetails {
 
     @NotEmpty(message = "Password cannot be empty")
     @Column(name = "password")
-    //@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$",  message = "\n" + "The password must contain at least 6 characters, at least one number, special character, upper and lower case letter")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$", message = "\n" + "The password must contain at least 6 characters, at least one number, special character, upper and lower case letter")
     private String password;
 
     @Transient //не воспринимается бд
@@ -47,7 +47,7 @@ public class User implements UserDetails {
     @Column(name = "registered_at")
     private LocalDate registered_at;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

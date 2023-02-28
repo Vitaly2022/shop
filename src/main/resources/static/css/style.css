@@ -28,7 +28,8 @@ footer {
 }
 
 .btn {
-    padding-left: 10px;
+  /*.box-sizing: padding-box;*/
+    padding-left: 5px;
 }
 
 .alert {
@@ -64,7 +65,8 @@ nav {
 }
 
 .card {
-    max-width: 17rem;
+    max-width: 10rem;
+    min-width: 10rem;
 }
 
 #cart {

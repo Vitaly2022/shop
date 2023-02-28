@@ -23,8 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                    .antMatchers("/", "/home", "/index", "/about", "/help", "/registration").permitAll()
-                    .antMatchers("/user/**","/news").hasRole("USER")
+                    .antMatchers("/", "/home", "/index", "/about", "/help", "/registration", "/searchByCategory/**").permitAll()
+                    .antMatchers("/user/**","/cart/**","/cartfromcateg/**").hasRole("USER")
                     .antMatchers("/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
                     .loginProcessingUrl("/login") //это уже POST запрос потому нет конфликта

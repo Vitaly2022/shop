@@ -18,7 +18,7 @@ public class RegistrationController {
     private UserDetailsServiceImpl userDetailsServiceimpl;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
@@ -35,11 +35,11 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
             model.addAttribute("passwordError", "Password mismatch");
             return "registration";
         }
-        if (!userDetailsServiceimpl.saveUser(userForm)){
+        if (!userDetailsServiceimpl.saveUser(userForm)) {
             model.addAttribute("usernameError", "This login is taken");
             return "registration";
         }

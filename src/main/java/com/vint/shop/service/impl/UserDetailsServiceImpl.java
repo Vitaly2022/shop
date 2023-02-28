@@ -72,4 +72,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return true;
     }
 
+    public void updateUser(Long id, User user) {
+        user.setId(id);
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
 }

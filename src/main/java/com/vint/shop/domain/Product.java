@@ -1,6 +1,7 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class Product {
     private Manufacturer manufacturer;
 
     @Column(name = "price")
-    private float price;
+    private BigDecimal price;
 
     @Column(name = "quantity")
     private int quantity;
@@ -105,11 +106,11 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -150,12 +151,13 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Float.compare(product.price, price) == 0 && quantity == product.quantity && rating == product.rating && usersvote == product.usersvote && Objects.equals(supplier, product.supplier) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl) && Objects.equals(manufacturer, product.manufacturer) && Objects.equals(reviews, product.reviews);
+
+        return id == product.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, supplier, name, category, description, imageUrl, manufacturer, price, quantity, reviews, rating, usersvote);
+        return Objects.hash(id);
     }
 
     @Override

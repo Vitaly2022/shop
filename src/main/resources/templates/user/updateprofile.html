@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css/}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8">
+    <title>Edit users</title>
+    <style type="text/css">
+    </style>
+
+</head>
+<body>
+
+<div class="container ADMIN ml-4">
+    <h4><span th:text="#{USER.PANEL}"</span></h4>
+</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">HOME</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/edituser" th:text="#{user.edituser}"></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="navbar-text" th:text="#{header.logged}" sec:authorize="isAuthenticated()"></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" style="color: #1e90ff" th:text="${#httpServletRequest.getRemoteUser().toUpperCase()}"></a>
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_USER')" th:href="@{/user}" style="color: #91a8ff;" th:text="${#httpServletRequest.getRemoteUser().toUpperCase()}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}" th:text="#{user.log_out}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/login}" th:text="#{user.log_in}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/registration}" th:text="#{register.button}"></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="h5" style="text-align: center;">
+            <div style="margin: 10px">Обновление</div>
+        </div>
+        <div class="col align-items-center" style="text-align: center;">
+            <form method="post"  th:object="${userUpdate}">
+
+                <label for="login">Введите логин: </label>
+                <input type="text"  th:field="*{login}" name="username" id="login">
+                <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+                <br><br>
+
+<!--                <label for="username">Введите ФИО: </label>-->
+                <label for="username">Введите полное имя</label>
+                <input type="text"  th:field="*{username}" name="username" id="username">
+                <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                <br><br>
+
+                <label for="password">Введите пароль: </label>
+                <input type="password" th:field="*{password}" name="password" id="password">
+                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <br><br>
+
+                <label for="passwordConfirm">Повторите пароль: </label>
+                <input type="password" th:field="*{passwordConfirm}" name="password" id="passwordConfirm">
+                <div style="color: red" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
+                <br><br>
+
+                <label for="email">Введите e-mail: </label>
+                <input type="email"  th:field="*{email}" name="email" id="email">
+                <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <br><br>
+
+                <label for="mobile">Введите телефон: </label>
+                <input type="text"  th:field="*{mobile}" name="mobile" id="mobile">
+                <div style="color: red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
+                <br><br>
+
+                <input type="submit" value="Обновить">
+            </form>
+        </div>
+    </div>
+    <form action="/user">
+        <button type="submit"> Назад </button>
+    </form>
+    <br>
+    <form action="/">
+        <button type="submit">Главная</button>
+    </form>
+</div>
+</body>
+</html>

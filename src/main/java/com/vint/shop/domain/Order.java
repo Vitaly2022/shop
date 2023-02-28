@@ -1,13 +1,13 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-
 @Entity
-@Table(name = "order")
+@Table(name = "myorder")
 public class Order {
 
     @Id
@@ -26,10 +26,10 @@ public class Order {
     private String status;
 
     @Column(name = "grand_total")
-    private float grand_total;
+    private BigDecimal grand_total;
 
-    @Column(name = "date_order")
-    private LocalDate date_order;
+    @Column(name = "dateoforder")
+    private LocalDate dateoforder;
 
     @Column(name = "description")
     private String description;
@@ -38,7 +38,7 @@ public class Order {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -66,20 +66,20 @@ public class Order {
         this.status = status;
     }
 
-    public float getGrand_total() {
+    public BigDecimal getGrand_total() {
         return grand_total;
     }
 
-    public void setGrand_total(float grand_total) {
+    public void setGrand_total(BigDecimal grand_total) {
         this.grand_total = grand_total;
     }
 
-    public LocalDate getDate_order() {
-        return date_order;
+    public LocalDate getDateoforder() {
+        return dateoforder;
     }
 
-    public void setDate_order(LocalDate date_order) {
-        this.date_order = date_order;
+    public void setDateoforder(LocalDate dateoforder) {
+        this.dateoforder = dateoforder;
     }
 
     public String getDescription() {
@@ -95,12 +95,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id && Float.compare(order.grand_total, grand_total) == 0 && Objects.equals(user, order.user) && Objects.equals(orderproductmaps, order.orderproductmaps) && Objects.equals(status, order.status) && Objects.equals(date_order, order.date_order) && Objects.equals(description, order.description);
+        return id == order.id && Objects.equals(user, order.user) && Objects.equals(orderproductmaps, order.orderproductmaps) && Objects.equals(status, order.status) && Objects.equals(grand_total, order.grand_total) && Objects.equals(dateoforder, order.dateoforder) && Objects.equals(description, order.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, orderproductmaps, status, grand_total, date_order, description);
+        return Objects.hash(id, user, orderproductmaps, status, grand_total, dateoforder, description);
     }
 
     @Override
@@ -108,9 +108,8 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", user=" + user +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", grand_total=" + grand_total +
-                ", date_order=" + date_order +
                 ", description='" + description + '\'' +
                 '}';
     }

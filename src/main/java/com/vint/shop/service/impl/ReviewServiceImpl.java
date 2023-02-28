@@ -1,14 +1,13 @@
 package com.vint.shop.service.impl;
 
-import com.vint.shop.domain.Category;
 import com.vint.shop.domain.Review;
-import com.vint.shop.repository.CategoryRepository;
 import com.vint.shop.repository.ReviewRepository;
 import com.vint.shop.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
