@@ -14,8 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   @Autowired
-   private UserDetailsServiceImpl userDetailsServiceimpl;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsServiceimpl;
 
     @Autowired
     public PasswordEncoder passwordEncoder;
@@ -23,19 +23,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                    .antMatchers("/", "/home", "/index", "/about", "/help", "/registration", "/searchByCategory/**").permitAll()
-                    .antMatchers("/user/**","/cart/**","/cartfromcateg/**").hasRole("USER")
-                    .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/", "/home", "/index", "/about", "/help", "/registration", "/searchByCategory/**").permitAll()
+                .antMatchers("/user/**", "/cart/**", "/cartfromcateg/**").hasRole("USER")
+                .antMatchers("/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
-                    .loginProcessingUrl("/login") //это уже POST запрос потому нет конфликта
-                    .usernameParameter("login")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/") //страница куда переходить при успешной регистрации
+                .loginProcessingUrl("/login")
+                .usernameParameter("login")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
                 .and()
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login");
     }
+
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceimpl).passwordEncoder(passwordEncoder);
@@ -43,10 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/webjars/**", "/js/**","/error/**"
-                , "/css/**","/fonts/**","/libs/**","/images/**");
+        web.ignoring().antMatchers("/webjars/**", "/js/**", "/error/**"
+                , "/css/**", "/fonts/**", "/libs/**", "/images/**");
     }
-
 
 
 }
