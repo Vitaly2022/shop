@@ -1,68 +1,92 @@
 package com.vint.shop.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "\"user\"")
-public class User { //изменить название класса
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
-    @Column(name = "password_hash")
-    private String password_hash;
+    private long id;
 
-    @Column(name = "first_name")
-    private String first_name;
+    @NotEmpty(message = "Login cannot be empty")
+    @Size(min = 5, max = 50, message = "Login must be between 5 and 50 characters\n")
+    @Column(name = "login")
+    private String login;
 
-    @Column(name = "last_name")
-    private String last_name;
+    @Column(name = "username")
+    private String username;
 
+    @NotEmpty(message = "Password cannot be empty")
+    @Column(name = "password")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).*$", message = "\n" + "The password must contain at least 6 characters, at least one number, special character, upper and lower case letter")
+    private String password;
+
+    @Transient //не воспринимается бд
+    private String passwordConfirm;
     @Column(name = "email")
     private String email;
 
     @Column(name = "mobile")
     private String mobile;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @Column(name = "registered_at")
     private LocalDate registered_at;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
+    public String getLogin() {
+        return login;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLast_name() {
-        return last_name;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getEmail() {
@@ -81,12 +105,12 @@ public class User { //изменить название класса
         this.mobile = mobile;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public LocalDate getRegistered_at() {
@@ -102,25 +126,50 @@ public class User { //изменить название класса
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(password_hash, user.password_hash) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile) && Objects.equals(role, user.role) && Objects.equals(registered_at, user.registered_at);
+        return id == user.id && Objects.equals(login, user.login) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(passwordConfirm, user.passwordConfirm) && Objects.equals(email, user.email) && Objects.equals(mobile, user.mobile) && Objects.equals(roles, user.roles) && Objects.equals(registered_at, user.registered_at);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, password_hash, first_name, last_name, email, mobile, role, registered_at);
+        return Objects.hash(id, login, username, password, passwordConfirm, email, mobile, roles, registered_at);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", password_hash='" + password_hash + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
-                ", role=" + role +
                 ", registered_at=" + registered_at +
                 '}';
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
+

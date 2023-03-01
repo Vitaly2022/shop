@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css/}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8">
+    <title>User cart</title>
+    <style type="text/css">
+        TABLE {
+            width: 300px; /* Ширина таблицы */
+            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+        }
+        TD, TH {
+            padding: 3px; /* Поля вокруг содержимого таблицы */
+            border: 1px solid black; /* Параметры рамки */
+        }
+        TH {
+            background: 	#87CEFA; /* Цвет фона */
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container ADMIN ml-4">
+    <H4><a th:href="@{/admin}" th:text="#{ADMIN.PANEL}"></a></H4>
+</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">HOME</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/orders" th:text="#{user.order}"></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/editprofile" th:text="#{user.edit.profile}"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/review" th:text="#{Reviews}"></a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="navbar-text" th:text="#{header.logged}" sec:authorize="isAuthenticated()"></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" style="color: #1e90ff" th:text="${#httpServletRequest.getRemoteUser().toUpperCase()}"></a>
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_USER')" th:href="@{/user}" style="color: #91a8ff;" th:text="${#httpServletRequest.getRemoteUser().toUpperCase()}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}" th:text="#{user.log_out}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/login}" th:text="#{user.log_in}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" th:href="@{/registration}" th:text="#{register.button}"></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<div class="Users ml-4">
+    <table>
+        <thead>
+        <th>Продукт</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        </thead>
+        <tr th:each="ord: ${OrdersProducts}">
+            <td th:text="${ord.product}"</td>
+            <td th:text="${ord.quantity}"</td>
+            <td th:text="${ord.price}"</td>
+        </tr>
+    </table>
+    <br>
+<form action="/admin/orders">
+    <button type="submit"> Назад </button>
+</form>
+<br>
+<form action="/">
+    <button type="submit">Главная</button>
+</form>
+</div>
+</body>
+</html>

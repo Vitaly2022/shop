@@ -1,0 +1,54 @@
+<!--lang="en"-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head th:replace="fragments/header :: header-css">
+</head>
+<body>
+<!--<p th:text="${category.getName()}"></p>-->
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="row">
+        <nav class="side-menu">
+            <h3><span th:text="#{product.category}"</span></h3>
+            <ul>
+                <li><p th:text="${category.getName()}"></p></li>
+            </ul>
+
+        </nav>
+
+<!--        <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn">-->
+<!--            <a th:href="@{admin/product/new}"><i class="fas fa-plus fa-2x"></i></a>-->
+<!--        </button>-->
+        <div class="col card-deck ml-5 my-3" th:if="${!productCategory.isEmpty()}" >
+            <div class="card" th:each="product : ${productCategory}">
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="admin">
+                    <button class="btn">
+                        <a th:href="@{'admin/product/delete/' + ${product.getId()}}" ><i class="fas fa-times"></i></a>
+                    </button>
+                    <button class="btn">
+                        <a th:href="@{'admin/product/edit/' + ${product.getId()}}" ><i class="fas fa-wrench"></i></a>
+                    </button>
+                </div>
+                <img class="card-img-top" th:if="${!product.getImageUrl().isEmpty()}" th:src="${product.getImageUrl()}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${product.getName()}"></h4>
+                    <p class="card-text" th:text="${product.getDescription()}"></p>
+                </div>
+                <div class="card-footer">
+                    <p th:text="${product.getPrice()}"></p>
+                    <a th:href="${'/cartfromcateg/add/' + product.getId()}" class="btn btn-lg btn-outline-info btn-block" th:text="#{product.add}" ></a>
+                </div>
+            </div>
+        </div>
+<!--        <div>-->
+<!--            <span th:text="#{product.count} + ' ' + ${productsCount}"></span>-->
+<!--        </div>-->
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

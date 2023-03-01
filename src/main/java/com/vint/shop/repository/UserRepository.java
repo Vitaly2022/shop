@@ -3,14 +3,11 @@ package com.vint.shop.repository;
 import com.vint.shop.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface UserRepository extends JpaRepository <User, Integer> {
-    User findUserById(int id);
-    User findByUsername(String username);
-
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
+    User findByLogin(String login);
 
+    User findByUsername(String username);
 
 }
