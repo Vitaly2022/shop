@@ -1,10 +1,11 @@
-package com.vint.shop.service.impl;
+package com.vint.shop.domain.service.impl;
 
 import com.vint.shop.domain.Order;
 import com.vint.shop.repository.OrderRepository;
-import com.vint.shop.service.OrderService;
+import com.vint.shop.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,12 +14,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     protected OrderRepository orderRepository;
-
+    @Transactional
     @Override
     public void saveOrder(Order order) {
         orderRepository.save(order);
     }
-
+    @Transactional
     @Override
     public boolean deleteOrder(Long orderId) {
         if (orderRepository.findById(orderId).isPresent()) {

@@ -2,19 +2,25 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Product;
 import com.vint.shop.repository.ProductRepository;
-import com.vint.shop.service.impl.CategoryServiceImpl;
-import com.vint.shop.service.impl.ManufacturerServiceImpl;
-import com.vint.shop.service.impl.ProductServiceImpl;
-import com.vint.shop.service.impl.SupplierServiceImpl;
+import com.vint.shop.domain.service.impl.CategoryServiceImpl;
+import com.vint.shop.domain.service.impl.ManufacturerServiceImpl;
+import com.vint.shop.domain.service.impl.ProductServiceImpl;
+import com.vint.shop.domain.service.impl.SupplierServiceImpl;
+import com.vint.shop.validator.ProductValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     protected ProductServiceImpl productServiceImpl;
@@ -30,6 +36,9 @@ public class ProductController {
 
     @Autowired
     protected SupplierServiceImpl supplierServiceImpl;
+
+    @Autowired
+    protected ProductValidator productValidator;
 
     @GetMapping
     public String viewProducts(Model model) {
@@ -48,18 +57,27 @@ public class ProductController {
     }
 
     @PostMapping("/new")
-    public String createNewProduct(@ModelAttribute("newProductForm") Product newProductForm, Model model) {
-        System.out.println("New product=" + newProductForm);
+    public String createNewProduct(@ModelAttribute("newProductForm") Product newProductForm, BindingResult bindingResult, Model model) {
+
+        productValidator.validate(newProductForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            logger.error(String.valueOf(bindingResult.getFieldError()));
+            return "admin/product/newproduct";
+        }
+
         if (!productServiceImpl.saveProduct(newProductForm)) {
             model.addAttribute("productNameError", "This name is taken");
             return "admin/product/newproduct";
         }
+        logger.debug(String.format("Product with id: %s successfully created.", newProductForm.getId()));
         return "redirect:/admin/product";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id) {
         productServiceImpl.deleteProduct(id);
+        logger.debug(String.format("Product with id: %s has been successfully deleted.", id));
         return "redirect:/admin/product";
     }
 
@@ -78,9 +96,15 @@ public class ProductController {
 
     @PostMapping("/edit/{id}")
     @Transactional
-    public String updateProduct(@PathVariable("id") long id, @ModelAttribute("editProduct") Product editProduct) {
+    public String updateProduct(@PathVariable("id") long id, @ModelAttribute("editProduct") Product editProduct, BindingResult bindingResult) {
+        productValidator.validate(editProduct, bindingResult);
 
+        if (bindingResult.hasErrors()) {
+            logger.error(String.valueOf(bindingResult.getFieldError()));
+            return "admin/product/editproduct";
+        }
         productServiceImpl.updateProduct(id, editProduct);
+        logger.debug(String.format("Product with id: %s has been successfully update.", id));
         return "redirect:/admin/product";
     }
 

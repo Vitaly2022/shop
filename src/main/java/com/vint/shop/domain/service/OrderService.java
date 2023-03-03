@@ -1,4 +1,4 @@
-package com.vint.shop.service;
+package com.vint.shop.domain.service;
 
 import com.vint.shop.domain.Order;
 
