@@ -26,11 +26,34 @@
             <div class="card" th:each="product : ${productCategory}">
                 <div sec:authorize="hasRole('ROLE_ADMIN')" class="admin">
                     <button class="btn">
-                        <a th:href="@{'admin/product/delete/' + ${product.getId()}}" ><i class="fas fa-times"></i></a>
+                        <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}" ><i class="fas fa-times"></i></a>
                     </button>
+
                     <button class="btn">
-                        <a th:href="@{'admin/product/edit/' + ${product.getId()}}" ><i class="fas fa-wrench"></i></a>
+                        <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}" ><i class="fas fa-wrench"></i></a>
                     </button>
+
+
+<!--                    <button class="btn">-->
+<!--                        <a th:href="@{'admin/product/delete/' + ${product.getId()}}" ><i class="fas fa-times"></i></a>-->
+<!--                    </button>-->
+
+<!--                    <form>-->
+<!--                        <button type="submit" th:formaction="@{/admin/category/delete/{id}(id=${category.getId()})}">Delete</button>-->
+<!--                    </form>-->
+
+
+
+<!--                    <button class="btn">-->
+<!--                        <a th:href="@{'admin/product/edit/' + ${product.getId()}}" ><i class="fas fa-wrench"></i></a>-->
+<!--                    </button>-->
+
+
+
+
+
+
+
                 </div>
                 <img class="card-img-top" th:if="${!product.getImageUrl().isEmpty()}" th:src="${product.getImageUrl()}" alt="Card image cap">
                 <div class="card-body">
