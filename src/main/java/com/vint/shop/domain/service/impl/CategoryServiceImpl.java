@@ -1,10 +1,11 @@
-package com.vint.shop.service.impl;
+package com.vint.shop.domain.service.impl;
 
 import com.vint.shop.domain.Category;
 import com.vint.shop.repository.CategoryRepository;
-import com.vint.shop.service.CategoryService;
+import com.vint.shop.domain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
-
+    @Transactional
     @Override
     public boolean saveCategory(Category category) {
         Category categoryFromDB = categoryRepository.findByName(category.getName());
@@ -29,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
         return true;
     }
-
+    @Transactional
     @Override
     public boolean deleteCategory(Long categoryId) {
         if (categoryRepository.findById(categoryId).isPresent()) {

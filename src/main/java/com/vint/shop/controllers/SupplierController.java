@@ -2,7 +2,9 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Supplier;
 import com.vint.shop.repository.SupplierRepository;
-import com.vint.shop.service.impl.SupplierServiceImpl;
+import com.vint.shop.domain.service.impl.SupplierServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("/admin/supplier")
 public class SupplierController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SupplierController.class);
 
     @Autowired
     protected SupplierServiceImpl supplierServiceImpl;
@@ -34,6 +38,7 @@ public class SupplierController {
             model.addAttribute("newSupplierForm", "This supplier is taken");
             return "admin/supplier";
         }
+        logger.debug(String.format("Supplier with id: %s successfully created.", newSupplierForm.getId()));
         return "redirect:/admin/supplier";
 
     }
@@ -41,6 +46,7 @@ public class SupplierController {
     @GetMapping("/delete/{id}")
     public String deleteSupplier(@PathVariable("id") long id) {
         supplierServiceImpl.deleteSupplier(id);
+        logger.debug(String.format("Supplier with id: %s has been successfully deleted.", id));
         return "redirect:/admin/supplier";
     }
 
@@ -62,6 +68,7 @@ public class SupplierController {
         supplier.setName(name);
         supplier.setEmail(email);
         supplierRepository.save(supplier);
+        logger.debug(String.format("Supplier with id: %s has been successfully update.", id));
         return "redirect:/admin/supplier";
     }
 

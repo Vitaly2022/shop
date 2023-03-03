@@ -29,8 +29,6 @@
                 <input type="text"  th:field="*{login}" name="username" id="login">
                 <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
                 <br><br>
-
-<!--                <label for="username">Введите ФИО: </label>-->
                 <label for="username">Введите полное имя</label>
                 <input type="text"  th:field="*{username}" name="username" id="username">
                 <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>

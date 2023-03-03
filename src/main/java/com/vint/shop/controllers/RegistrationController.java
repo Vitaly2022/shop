@@ -1,7 +1,7 @@
 package com.vint.shop.controllers;
 
 import com.vint.shop.domain.User;
-import com.vint.shop.service.impl.UserDetailsServiceImpl;
+import com.vint.shop.domain.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

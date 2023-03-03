@@ -1,4 +1,4 @@
-package com.vint.shop.service.impl;
+package com.vint.shop.domain.service.impl;
 
 import com.vint.shop.domain.Role;
 import com.vint.shop.domain.User;
@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -46,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return user;
     }
-
+    @Transactional
     public boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
@@ -58,7 +59,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
+    @Transactional
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByLogin(user.getLogin());
         if (userFromDB != null) {
@@ -71,7 +72,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.save(user);
         return true;
     }
-
+    @Transactional
     public void updateUser(Long id, User user) {
         user.setId(id);
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));

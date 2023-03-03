@@ -9,16 +9,15 @@
     <title>Edit users</title>
     <style type="text/css">
         TABLE {
-            width: 300px; /* Ширина таблицы */
-            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            width: 300px;
+            border-collapse: collapse;
         }
         TD, TH {
-            padding: 3px; /* Поля вокруг содержимого таблицы */
-            border: 1px solid black; /* Параметры рамки */
+            padding: 3px;
+            border: 1px solid black;
         }
         TH {
-            background: 	#87CEFA; /* Цвет фона */
-        }
+            background: 	#87CEFA;
     </style>
 
 </head>
@@ -69,7 +68,6 @@
     <th>Grand total</th>
     <th>Date of order</th>
     <th>Description</th>
-<!--    <th>Операция</th>-->
     </thead>
       <tr th:each="order: ${OrdersUser}">
           <td th:text="${order.getId()}"</td>
@@ -77,11 +75,6 @@
           <td th:text="${order.grand_total}"</td>
           <td th:text="${order.dateoforder}"</td>
           <td th:text="${order.description}"</td>
-<!--          <td>-->
-<!--              <form>-->
-<!--                  <button type="submit" th:formaction="@{/user/delete/order/{id}(id=${order.getId()})}">Delete</button>-->
-<!--              </form>-->
-<!--          </td>-->
 </tr>
   </table>
     <br>

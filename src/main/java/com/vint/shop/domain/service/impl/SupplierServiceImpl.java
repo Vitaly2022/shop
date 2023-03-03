@@ -1,10 +1,11 @@
-package com.vint.shop.service.impl;
+package com.vint.shop.domain.service.impl;
 
 import com.vint.shop.domain.Supplier;
 import com.vint.shop.repository.SupplierRepository;
-import com.vint.shop.service.SupplierService;
+import com.vint.shop.domain.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class SupplierServiceImpl implements SupplierService {
     public List<Supplier> findAll() {
         return supplierRepository.findAll();
     }
-
+    @Transactional
     @Override
     public boolean saveSupplier(Supplier supplier) {
         Supplier supplierFromDB = supplierRepository.findByName(supplier.getName());
@@ -29,7 +30,7 @@ public class SupplierServiceImpl implements SupplierService {
         supplierRepository.save(supplier);
         return true;
     }
-
+    @Transactional
     @Override
     public boolean deleteSupplier(Long supplierId) {
         if (supplierRepository.findById(supplierId).isPresent()) {
