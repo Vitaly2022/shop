@@ -1,4 +1,4 @@
-package com.vint.shop.domain.service;
+package com.vint.shop.service;
 
 import com.vint.shop.domain.OrderProductMap;
 

@@ -2,10 +2,10 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Product;
 import com.vint.shop.repository.ProductRepository;
-import com.vint.shop.domain.service.impl.CategoryServiceImpl;
-import com.vint.shop.domain.service.impl.ManufacturerServiceImpl;
-import com.vint.shop.domain.service.impl.ProductServiceImpl;
-import com.vint.shop.domain.service.impl.SupplierServiceImpl;
+import com.vint.shop.service.impl.CategoryServiceImpl;
+import com.vint.shop.service.impl.ManufacturerServiceImpl;
+import com.vint.shop.service.impl.ProductServiceImpl;
+import com.vint.shop.service.impl.SupplierServiceImpl;
 import com.vint.shop.validator.ProductValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

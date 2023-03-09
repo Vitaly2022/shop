@@ -22,8 +22,6 @@ public class ProductValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "error.not_empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "error.not_empty");
 
-
-
         if (product.getName().length() <= 1) {
             errors.rejectValue("name", "product.error.name.less_2");
         }
@@ -32,7 +30,6 @@ public class ProductValidator implements Validator {
         }
         if (product.getPrice().signum() != 1) {
             errors.rejectValue("price", "product.error.price");
-
         }
     }
 }

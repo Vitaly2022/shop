@@ -1,7 +1,7 @@
-package com.vint.shop.domain.service.impl;
+package com.vint.shop.service.impl;
 
 import com.vint.shop.domain.Product;
-import com.vint.shop.domain.service.ShoppingCartService;
+import com.vint.shop.service.ShoppingCartService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Supplier;
 import com.vint.shop.repository.SupplierRepository;
-import com.vint.shop.domain.service.impl.SupplierServiceImpl;
+import com.vint.shop.service.impl.SupplierServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

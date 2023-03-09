@@ -1,8 +1,8 @@
-package com.vint.shop.domain.service.impl;
+package com.vint.shop.service.impl;
 
 import com.vint.shop.domain.Order;
 import com.vint.shop.repository.OrderRepository;
-import com.vint.shop.domain.service.OrderService;
+import com.vint.shop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

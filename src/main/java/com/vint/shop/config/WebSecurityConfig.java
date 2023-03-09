@@ -1,6 +1,6 @@
 package com.vint.shop.config;
 
-import com.vint.shop.domain.service.impl.UserDetailsServiceImpl;
+import com.vint.shop.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
