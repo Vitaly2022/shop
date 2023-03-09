@@ -2,7 +2,7 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Review;
 import com.vint.shop.repository.ReviewRepository;
-import com.vint.shop.domain.service.impl.ReviewServiceImpl;
+import com.vint.shop.service.impl.ReviewServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

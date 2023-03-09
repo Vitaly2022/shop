@@ -1,7 +1,7 @@
-package com.vint.shop.domain.service.impl;
+package com.vint.shop.service.impl;
 
 import com.vint.shop.domain.Review;
-import com.vint.shop.domain.service.ReviewService;
+import com.vint.shop.service.ReviewService;
 import com.vint.shop.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

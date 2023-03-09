@@ -1,4 +1,4 @@
-package com.vint.shop.domain.service.impl;
+package com.vint.shop.service.impl;
 
 import com.vint.shop.domain.Role;
 import com.vint.shop.domain.User;
