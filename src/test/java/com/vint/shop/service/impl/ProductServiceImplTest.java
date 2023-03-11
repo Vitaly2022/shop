@@ -28,11 +28,9 @@ class ProductServiceImplTest {
         List<Product> products = createProducts();
         Mockito.when(productRepository.findAll()).thenReturn(products);
         List<Product> result = productRepository.findAll();
-
         Assertions.assertEquals(2, result.size());
 
     }
-
     private List<Product> createProducts() {
 
         Product product1 = new Product();
