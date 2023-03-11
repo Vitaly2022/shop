@@ -39,8 +39,8 @@ class CategoryServiceImplTest {
         newCategory.setId(3);
         newCategory.setName("TestCategory");
         underTest.saveCategory(newCategory);
-        ArgumentCaptor<Category> categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);//перехватываем
-        verify(categoryRepository).save(categoryArgumentCaptor.capture());//проверяем
+        ArgumentCaptor<Category> categoryArgumentCaptor = ArgumentCaptor.forClass(Category.class);
+        verify(categoryRepository).save(categoryArgumentCaptor.capture());
         Category categoryCapture = categoryArgumentCaptor.getValue();
         assertThat(categoryCapture).isEqualTo(newCategory);
     }
@@ -51,8 +51,8 @@ class CategoryServiceImplTest {
         newCategory.setId(3);
         newCategory.setName("TestCategory");
         categoryRepository.deleteById(newCategory.getId());
-        ArgumentCaptor<Long> categoryArgumentCaptor = ArgumentCaptor.forClass(Long.class);//перехватываем
-        verify(categoryRepository).deleteById(categoryArgumentCaptor.capture());//проверяем
+        ArgumentCaptor<Long> categoryArgumentCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(categoryRepository).deleteById(categoryArgumentCaptor.capture());
         Long i = categoryArgumentCaptor.getValue();
         Assertions.assertEquals(3, i);
     }
