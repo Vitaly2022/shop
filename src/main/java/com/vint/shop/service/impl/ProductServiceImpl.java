@@ -58,11 +58,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAllByOrderByIdAsc() {
-        return productRepository.findAllByOrderByIdAsc();
-    }
-
-    @Override
     public Product findById(long id) {
         return productRepository.findById(id).get();
     }

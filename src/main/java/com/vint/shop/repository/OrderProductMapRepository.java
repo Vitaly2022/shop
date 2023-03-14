@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface OrderProductMapRepository extends JpaRepository<OrderProductMap, Long> {
 
-    List<OrderProductMap> findByOrder(Order order);
-
-    List<OrderProductMap> findAllByOrder(Order order);
+//    List<OrderProductMap> findByOrder(Order order);
+//
+//    List<OrderProductMap> findAllByOrder(Order order);
 
     List<OrderProductMap> findAllByOrderid(Long id);
 
