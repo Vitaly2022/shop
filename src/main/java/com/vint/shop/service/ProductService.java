@@ -18,8 +18,6 @@ public interface ProductService {
 
     List<Product> findAllByCategoryId(long categoryId);
 
-    List<Product> findAllByOrderByIdAsc();
-
     Product findById(long id);
 
     long count();

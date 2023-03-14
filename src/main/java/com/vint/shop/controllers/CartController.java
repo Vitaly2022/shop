@@ -65,7 +65,6 @@ public class CartController {
             logger.debug(String.format("Product with id: %s added to shopping cart.", id));
         }
         String red = "redirect:/searchByCategory/" + product.getCategory().getId();
-        System.out.println(red);
         return red;
     }
 
