@@ -15,6 +15,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     protected ProductRepository productRepository;
 
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();

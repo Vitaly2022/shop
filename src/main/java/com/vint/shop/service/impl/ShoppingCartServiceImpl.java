@@ -59,12 +59,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .orElse(BigDecimal.ZERO);
     }
 
-    @Override
-    public void cartCheckout() {
-        cart.clear();
-    }
-
     public Map<Product, Integer> getCart() {
         return cart;
     }
 }
+
+

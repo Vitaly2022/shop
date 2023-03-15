@@ -15,6 +15,10 @@ public class SupplierServiceImpl implements SupplierService {
     @Autowired
     protected SupplierRepository supplierRepository;
 
+    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
+    }
+
     @Override
     public List<Supplier> findAll() {
         return supplierRepository.findAll();
