@@ -10,9 +10,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceImplTest {
@@ -56,4 +58,18 @@ class CategoryServiceImplTest {
         Long i = categoryArgumentCaptor.getValue();
         Assertions.assertEquals(3, i);
     }
+
+    boolean resultTest = false;
+
+    @Test
+    void trueIfFindCategory() {
+        Category newCategory = new Category();
+        newCategory.setId(3);
+        newCategory.setName("TestCategory");
+        when(categoryRepository.findById(newCategory.getId())).thenReturn(Optional.of(newCategory));
+        if (categoryRepository.findById(newCategory.getId()).isPresent()) resultTest = true;
+        assertThat(resultTest).isTrue();
+    }
+
+
 }

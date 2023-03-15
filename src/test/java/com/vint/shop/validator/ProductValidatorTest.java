@@ -20,9 +20,6 @@ class ProductValidatorTest {
     @Mock
     private ProductRepository productRepository;
 
-    @InjectMocks
-    private ProductServiceImpl productServiceimpl;
-
     @Test
     void PriceAboveZero() {
 

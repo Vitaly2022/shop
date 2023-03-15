@@ -15,6 +15,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Autowired
     protected ManufacturerRepository manufacturerRepository;
 
+    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
+        this.manufacturerRepository = manufacturerRepository;
+    }
+
     @Override
     public List<Manufacturer> findAll() {
         return manufacturerRepository.findAll();

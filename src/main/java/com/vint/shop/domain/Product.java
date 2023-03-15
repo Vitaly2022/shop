@@ -1,7 +1,6 @@
 package com.vint.shop.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;

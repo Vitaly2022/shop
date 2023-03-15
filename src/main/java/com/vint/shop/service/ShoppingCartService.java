@@ -17,5 +17,4 @@ public interface ShoppingCartService {
 
     BigDecimal totalPrice();
 
-    void cartCheckout();
 }

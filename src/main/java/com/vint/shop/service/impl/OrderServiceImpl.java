@@ -14,6 +14,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     protected OrderRepository orderRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     @Transactional
     @Override
     public void saveOrder(Order order) {

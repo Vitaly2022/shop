@@ -15,6 +15,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     protected ReviewRepository reviewRepository;
 
+    public ReviewServiceImpl(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
+
     @Override
     public List<Review> findAll() {
         return reviewRepository.findAll();
