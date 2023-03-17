@@ -1,6 +1,6 @@
 ## Description
 
-This is my first project using Spring. I wanted to do e-commerce web application to learn Spring. I have used **Spring Boot**, **Spring Security**, **Spring Data JPA** with **H2 database**, for views i have used **Thymeleaf** template and **Bootstrap** CSS framework.![img.png](img.png)
+As part of my graduation project, I implemented an online-store using **Spring**. In the project I used **Spring Boot**, **Spring Security 5**, **Spring Data JPA** with **MySql database**, for views I used **Thymeleaf** template and **Bootstrap** CSS framework. Tests are made on **JUnit 5** with test **H2 database **. For accelerated development, I used **Spring BootDevTools**.
 
 ## Screenshots
 
