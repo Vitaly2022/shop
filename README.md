@@ -6,7 +6,6 @@ As part of my graduation project, I implemented an online-store using **Spring**
 
 <img src="src/main/resources/siteexample.jpg" height=60% width=95%>
 <img src="src/main/resources/adminpanel.jpg" height=60% width=95%>
-<img src="src/main/resources/userpanel.jpg" height=60% width=95%>
 
 ## Installation
 
