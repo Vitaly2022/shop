@@ -24,6 +24,11 @@ public class CategoryController {
     @Autowired
     protected CategoryRepository categoryRepository;
 
+    public CategoryController(CategoryServiceImpl categoryServiceImpl, CategoryRepository categoryRepository) {
+        this.categoryServiceImpl = categoryServiceImpl;
+        this.categoryRepository = categoryRepository;
+    }
+
     @GetMapping
     public String viewCategory(Model model) {
         model.addAttribute("allCategory", categoryServiceImpl.findAll());
