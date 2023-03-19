@@ -4,7 +4,6 @@ import com.vint.shop.domain.User;
 import com.vint.shop.repository.OrderProductMapRepository;
 import com.vint.shop.repository.OrderRepository;
 import com.vint.shop.repository.UserRepository;
-import com.vint.shop.service.impl.OrderServiceImpl;
 import com.vint.shop.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +24,14 @@ public class AdminController {
     private OrderRepository orderRepository;
 
     @Autowired
-    private OrderServiceImpl orderServiceImpl;
-
-    @Autowired
     private OrderProductMapRepository orderProductMapRepository;
 
+    public AdminController(UserDetailsServiceImpl userDetailsServiceImpl, UserRepository userRepository, OrderRepository orderRepository, OrderProductMapRepository orderProductMapRepository) {
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
+        this.orderProductMapRepository = orderProductMapRepository;
+    }
 
     @GetMapping
     public String adminhome() {
@@ -49,7 +51,6 @@ public class AdminController {
     public String userid(@PathVariable("id") Long id, Model model) {
         User usercard = userRepository.findById(id).get();
         model.addAttribute("usercard", usercard);
-        //    System.out.println(userRepository.findById(id));
         return "admin/usercard";
     }
 
