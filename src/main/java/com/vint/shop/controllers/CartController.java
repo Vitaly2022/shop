@@ -38,6 +38,14 @@ public class CartController {
     @Autowired
     protected UserRepository userRepository;
 
+    public CartController(ShoppingCartServiceImpl shoppingCartServiceImpl, ProductRepository productRepository, OrderRepository orderRepository, OrderProductMapRepository orderProductMapRepository, OrderServiceImpl orderServiceImpl, UserRepository userRepository) {
+        this.shoppingCartServiceImpl = shoppingCartServiceImpl;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+        this.orderProductMapRepository = orderProductMapRepository;
+        this.orderServiceImpl = orderServiceImpl;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/cart")
     public String cart(Model model) {
