@@ -37,14 +37,11 @@ public class UserController {
 
     @PostMapping("/update")
     @Transactional
-    public String updateProduct(@ModelAttribute("userForm") User user) {
-        System.out.println("USER=" + user);
+    public String updateProduct(@ModelAttribute("userUpdate") User user) {
 
         Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         userDetailsServiceImpl.updateUser(id, user);
 
         return "redirect:/user";
     }
-
-
 }

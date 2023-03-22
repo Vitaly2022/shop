@@ -21,7 +21,11 @@ public class HomeController {
 
     @Autowired
     protected ProductServiceImpl productServiceImpl;
-
+    public HomeController(CategoryServiceImpl categoryServiceImpl, CategoryRepository categoryRepository, ProductServiceImpl productServiceImpl) {
+        this.categoryServiceImpl = categoryServiceImpl;
+        this.categoryRepository = categoryRepository;
+        this.productServiceImpl = productServiceImpl;
+    }
 
     @GetMapping(value = {"/", "/index", "/home"})
     public String home(Model model) {
