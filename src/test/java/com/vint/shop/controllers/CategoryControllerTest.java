@@ -70,7 +70,10 @@ class CategoryControllerTest {
 
     @Test
     public void CategoryControllerStatus3Delete() throws Exception {
-        this.mockMvc.perform(get("/admin/category/delete/1")).andExpect(status().is3xxRedirection());
+        Category newCategoru = new Category();
+        newCategoru.setId(1);
+        long id= newCategoru.getId();
+        this.mockMvc.perform(get("/admin/category/delete/"+id)).andExpect(status().is3xxRedirection());
     }
 
     @Test
@@ -87,7 +90,6 @@ class CategoryControllerTest {
                 .andExpect(view().name("admin/category/editcategory"))
                 .andDo(print());
     }
-
     @Test
     public void CategoryControllerPostEditStatus() throws Exception {
         Category newCategory = new Category();
