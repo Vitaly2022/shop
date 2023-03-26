@@ -24,6 +24,11 @@ public class ManufacturerController {
     @Autowired
     protected ManufacturerRepository manufacturerRepository;
 
+    public ManufacturerController(ManufacturerServiceImpl manufacturerServiceImpl, ManufacturerRepository manufacturerRepository) {
+        this.manufacturerServiceImpl = manufacturerServiceImpl;
+        this.manufacturerRepository = manufacturerRepository;
+    }
+
     @GetMapping
     public String viewCategory(Model model) {
         model.addAttribute("allmanufacturers", manufacturerServiceImpl.findAll());
