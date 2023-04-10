@@ -41,6 +41,14 @@ public class OrderController {
     @Autowired
     protected OrderServiceImpl orderServiceImpl;
 
+    public OrderController(ShoppingCartServiceImpl shoppingCartServiceImpl, ProductRepository productRepository, OrderRepository orderRepository, OrderProductMapRepository orderProductMapRepository, OrderServiceImpl orderServiceImpl) {
+        this.shoppingCartServiceImpl = shoppingCartServiceImpl;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+        this.orderProductMapRepository = orderProductMapRepository;
+        this.orderServiceImpl = orderServiceImpl;
+    }
+
     @GetMapping("/carttoorder")
     public String carttoorder() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

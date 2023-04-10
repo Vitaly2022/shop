@@ -60,6 +60,7 @@ class CategoryControllerTest {
         this.mockMvc.perform(post("/admin/category")).andExpect(status().isOk());
         Category newCategoryForm = new Category();
         Mockito.when(categoryServiceImpl.saveCategory(newCategoryForm)).thenReturn(true);
+
         if (!categoryServiceImpl.saveCategory(newCategoryForm))
             this.mockMvc.perform(post("/admin/category"))
                     .andExpect(view().name("admin/category")).andDo(print());
