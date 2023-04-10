@@ -40,6 +40,15 @@ public class ProductController {
     @Autowired
     protected ProductValidator productValidator;
 
+    public ProductController(ProductServiceImpl productServiceImpl, CategoryServiceImpl categoryServiceImpl, ManufacturerServiceImpl manufacturerServiceImpl, ProductRepository productRepository, SupplierServiceImpl supplierServiceImpl, ProductValidator productValidator) {
+        this.productServiceImpl = productServiceImpl;
+        this.categoryServiceImpl = categoryServiceImpl;
+        this.manufacturerServiceImpl = manufacturerServiceImpl;
+        this.productRepository = productRepository;
+        this.supplierServiceImpl = supplierServiceImpl;
+        this.productValidator = productValidator;
+    }
+
     @GetMapping
     public String viewProducts(Model model) {
         model.addAttribute("allproducts", productServiceImpl.findAll());
