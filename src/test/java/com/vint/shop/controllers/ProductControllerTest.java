@@ -2,6 +2,7 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Product;
 import com.vint.shop.repository.ProductRepository;
+import com.vint.shop.service.controllers.ProductController;
 import com.vint.shop.service.impl.CategoryServiceImpl;
 import com.vint.shop.service.impl.ManufacturerServiceImpl;
 import com.vint.shop.service.impl.ProductServiceImpl;

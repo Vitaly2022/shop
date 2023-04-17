@@ -1,4 +1,4 @@
-package com.vint.shop.controllers;
+package com.vint.shop.service.controllers;
 
 import com.vint.shop.domain.User;
 import com.vint.shop.repository.OrderProductMapRepository;

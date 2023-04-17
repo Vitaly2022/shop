@@ -3,7 +3,6 @@ package com.vint.shop.service.impl;
 import com.vint.shop.domain.Manufacturer;
 import com.vint.shop.repository.ManufacturerRepository;
 import com.vint.shop.service.ManufacturerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,6 @@ import java.util.List;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
-
-    @Autowired
     protected ManufacturerRepository manufacturerRepository;
 
     public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
@@ -23,6 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public List<Manufacturer> findAll() {
         return manufacturerRepository.findAll();
     }
+
     @Transactional
     @Override
     public boolean saveManufacturer(Manufacturer manufacturer) {
@@ -34,6 +32,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         manufacturerRepository.save(manufacturer);
         return true;
     }
+
     @Transactional
     @Override
     public boolean deleteManufacturer(Long manufacturerId) {

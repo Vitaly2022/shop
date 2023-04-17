@@ -2,6 +2,7 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Category;
 import com.vint.shop.repository.CategoryRepository;
+import com.vint.shop.service.controllers.CategoryController;
 import com.vint.shop.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
