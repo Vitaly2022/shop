@@ -2,6 +2,7 @@ package com.vint.shop.controllers;
 
 import com.vint.shop.domain.Manufacturer;
 import com.vint.shop.repository.ManufacturerRepository;
+import com.vint.shop.service.controllers.ManufacturerController;
 import com.vint.shop.service.impl.ManufacturerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

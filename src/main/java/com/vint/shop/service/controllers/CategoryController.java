@@ -1,4 +1,4 @@
-package com.vint.shop.controllers;
+package com.vint.shop.service.controllers;
 
 import com.vint.shop.domain.Category;
 import com.vint.shop.repository.CategoryRepository;

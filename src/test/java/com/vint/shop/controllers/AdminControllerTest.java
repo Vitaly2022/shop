@@ -5,6 +5,7 @@ import com.vint.shop.domain.User;
 import com.vint.shop.repository.OrderProductMapRepository;
 import com.vint.shop.repository.OrderRepository;
 import com.vint.shop.repository.UserRepository;
+import com.vint.shop.service.controllers.AdminController;
 import com.vint.shop.service.impl.UserDetailsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

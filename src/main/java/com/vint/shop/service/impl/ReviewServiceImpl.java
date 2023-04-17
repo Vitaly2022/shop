@@ -1,9 +1,8 @@
 package com.vint.shop.service.impl;
 
 import com.vint.shop.domain.Review;
-import com.vint.shop.service.ReviewService;
 import com.vint.shop.repository.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vint.shop.service.ReviewService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,6 @@ import java.util.List;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
-    @Autowired
     protected ReviewRepository reviewRepository;
 
     public ReviewServiceImpl(ReviewRepository reviewRepository) {
@@ -23,6 +20,7 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findAll() {
         return reviewRepository.findAll();
     }
+
     @Transactional
     @Override
     public boolean saveReview(Review title) {
@@ -34,6 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.save(title);
         return true;
     }
+
     @Transactional
     @Override
     public boolean deleteReview(Long reviewId) {

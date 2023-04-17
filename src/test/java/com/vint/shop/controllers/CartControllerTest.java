@@ -6,6 +6,7 @@ import com.vint.shop.repository.OrderProductMapRepository;
 import com.vint.shop.repository.OrderRepository;
 import com.vint.shop.repository.ProductRepository;
 import com.vint.shop.repository.UserRepository;
+import com.vint.shop.service.controllers.CartController;
 import com.vint.shop.service.impl.OrderServiceImpl;
 import com.vint.shop.service.impl.ShoppingCartServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

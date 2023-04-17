@@ -3,7 +3,6 @@ package com.vint.shop.service.impl;
 import com.vint.shop.domain.Product;
 import com.vint.shop.repository.ProductRepository;
 import com.vint.shop.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
     protected ProductRepository productRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -35,6 +33,7 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
         return true;
     }
+
     @Transactional
     @Override
     public boolean deleteProduct(Long productId) {
@@ -44,12 +43,14 @@ public class ProductServiceImpl implements ProductService {
         }
         return false;
     }
+
     @Transactional
     @Override
     public void updateProduct(Long id, Product product) {
         product.setId(id);
         productRepository.save(product);
     }
+
     @Transactional
     @Override
     public long productsCount() {
@@ -65,6 +66,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(long id) {
         return productRepository.findById(id).get();
     }
+
     @Transactional
     @Override
     public long count() {
